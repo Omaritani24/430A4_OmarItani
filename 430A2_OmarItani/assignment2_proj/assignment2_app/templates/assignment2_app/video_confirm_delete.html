@@ -1,0 +1,114 @@
+{% extends 'assignment2_app/base.html' %}
+
+{% block title %}Remove {{ video.movie_title }} - Movie Collection Manager{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="fas fa-exclamation-triangle me-3"></i>Remove Movie</h1>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card card-custom">
+            <div class="card-header" style="background: linear-gradient(45deg, #e74c3c, #c0392b); color: white;">
+                <h3 class="mb-0"><i class="fas fa-trash-alt me-2"></i>Confirmation Required</h3>
+            </div>
+            <div class="card-body">
+                <div class="warning-section mb-4">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-exclamation-triangle fa-4x text-warning mb-3"></i>
+                        <h4 class="text-danger">Are you sure you want to remove this movie?</h4>
+                        <p class="text-muted">This action will permanently delete the movie from your collection.</p>
+                    </div>
+                </div>
+                
+                <div class="movie-preview mb-4">
+                    <div class="card" style="border: 2px solid #e74c3c; border-radius: 15px;">
+                        <div class="card-header" style="background: linear-gradient(45deg, #34495e, #2c3e50); color: white;">
+                            <h5 class="mb-0"><i class="fas fa-film me-2"></i>{{ video.movie_title }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="detail-row">
+                                        <i class="fas fa-hashtag text-primary me-2"></i>
+                                        <strong>Movie ID:</strong> {{ video.movie_id }}
+                                    </div>
+                                    <div class="detail-row">
+                                        <i class="fas fa-user-tie text-primary me-2"></i>
+                                        <strong>Director:</strong> {{ video.director_name }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="detail-row">
+                                        <i class="fas fa-tags text-primary me-2"></i>
+                                        <strong>Genre:</strong> {{ video.movie_genre }}
+                                    </div>
+                                    <div class="detail-row">
+                                        <i class="fas fa-calendar-alt text-primary me-2"></i>
+                                        <strong>Year:</strong> {{ video.release_year }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert alert-danger-custom" style="background: linear-gradient(45deg, #e74c3c, #c0392b); color: white; border-radius: 10px; border: none;">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-ban fa-2x me-3"></i>
+                        <div>
+                            <h6 class="mb-1"><strong>Warning!</strong></h6>
+                            <p class="mb-0">This action cannot be undone. The movie will be permanently removed from your collection.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="action-buttons">
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="{% url 'movie_collection:video_detail' video.pk %}" class="btn btn-custom btn-secondary-custom">
+                                <i class="fas fa-arrow-left me-2"></i>Cancel & Return
+                            </a>
+                            <button type="submit" class="btn btn-custom btn-danger-custom">
+                                <i class="fas fa-trash-alt me-2"></i>Yes, Remove Movie
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.warning-section {
+    background: rgba(231, 76, 60, 0.05);
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid #e74c3c;
+}
+
+.movie-preview {
+    background: rgba(52, 152, 219, 0.05);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.detail-row {
+    margin-bottom: 10px;
+    padding: 5px 0;
+}
+
+.alert-danger-custom {
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+}
+
+.action-buttons {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #ecf0f1;
+}
+</style>
+{% endblock %}

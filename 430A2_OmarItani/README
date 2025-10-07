@@ -1,0 +1,5 @@
+To run this first you activate the venv
+.venv/scripts/activate
+then you cd to assignment2_proj
+cd assignment2_proj
+then docker compose up and it runs on local host port 8000
